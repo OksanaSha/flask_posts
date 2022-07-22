@@ -26,6 +26,14 @@ class CreateUserModel(pydantic.BaseModel):
     password: str
     email: str
 
+    @pydantic.validator('user_name')
+    def already_exists(cls, value: str):
+        with Session() as session:
+            user = session.query(UserModel).filter_by(user_name=value).first()
+            if user:
+                raise HTTPError(409, 'user already exists')
+            return value
+
 
 class CreateAdvertisementModel(pydantic.BaseModel):
     title: str

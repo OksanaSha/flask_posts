@@ -7,14 +7,14 @@ TOKEN = {'token': '9d776ed5-c9b1-423f-b92b-3c30f6e52823'}  # user2
 
 
 '''/user'''
-# response = requests.post(
-#     f'{URL}/user',
-#     json={
-#         'user_name': 'user2',
-#         'password': 'KFSGn23',
-#         'email': 'user2@test.ru'
-#     }
-# )
+response = requests.post(
+    f'{URL}/user',
+    json={
+        'user_name': 'user1',
+        'password': 'KF5jlh3',
+        'email': 'user1@test.ru'
+    }
+)
 #
 
 # response = requests.get(

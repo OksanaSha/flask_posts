@@ -8,7 +8,8 @@ from sqlalchemy.exc import IntegrityError
 from hashlib import md5
 
 
-PG_DSN = "postgresql://oks:@localhost:5432/posts_flask"
+# PG_DSN = "postgresql://oks:@localhost:5432/posts_flask"
+PG_DSN = "postgresql://admin:1234@127.0.0.1:5432/flask_netology"
 engine = sq.create_engine(PG_DSN)
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
@@ -30,7 +31,6 @@ class UserModel(Base):
             'email': self.email,
             'registration': self.registration,
             'id': self.id,
-            'password': self.password
         }
 
     @classmethod
@@ -45,6 +45,8 @@ class UserModel(Base):
             session.commit()
         except IntegrityError:
             session.rollback()
+        except Exception as er:
+            print(er)
         else:
             token = Token(user_id=new_user.id)
             session.add(token)
